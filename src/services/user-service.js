@@ -28,6 +28,26 @@ class UserService{
         }
     }
 
+    async signIn(email,password){
+        try {
+            const user = await this.userRepository.getByEmail(email);
+            if(user === null){
+                console.log("User not found");
+                throw (error);
+            }
+            const isPasswordMatched = this.comparePassword(password, user.password);
+            if(!isPasswordMatched){
+                console.log("Password not matched");
+                throw (error);
+            }
+            const token = await this.createToken({email:user.email, id: user.id});
+            return token;
+
+        } catch (error) {
+            console.log("Something went wrong: Signing In");
+            throw (error);
+        }
+    }
     async createToken(user){
         try {
             const token = await jwt.sign(user,JWT_KEY,{expiresIn: '1h'});
