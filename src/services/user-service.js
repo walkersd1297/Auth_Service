@@ -48,14 +48,14 @@ class UserService{
         }
     }
 
-    // comparePassword(userInputPlainPassword, encryptedPassword){
-    //     try {
-    //         return bcrypt.compareSync(userInputPlainPassword, encryptedPassword);
-    //     } catch (error) {
-    //         console.log("Something went wrong: comparing password");
-    //         throw (error);
-    //     }
-    // }
+    comparePassword(userInputPlainPassword, encryptedPassword){
+        try {
+            return bcrypt.compareSync(userInputPlainPassword, encryptedPassword);
+        } catch (error) {
+            console.log("Something went wrong: comparing password");
+            throw (error);
+        }
+    }
 }
 
 module.exports = UserService;
