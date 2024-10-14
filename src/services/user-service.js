@@ -80,11 +80,11 @@ class UserService{
 
     async isAuthenticated(token){
         try {
-            const response = this.verifyToken(token);
+            const response = await this.verifyToken(token);
             if(!token){
                 throw {error:'Invalid token'};
             }
-            const user = this.userRepository.getById(response.id);
+            const user = await this.userRepository.getById(response.id);
             if(!user){
                 throw {error:'no user with the corresponding token'}
             }
